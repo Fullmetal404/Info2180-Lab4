@@ -70,9 +70,9 @@ $superheroes = [
     $query = isset($_GET['query']) ? trim($_GET['query']) : '';
     if ($query) {
         $results = array_filter($superheroes, function($hero) use ($query) { 
-            return stripos($hero['name'], $query) !== false || stripos($hero['alias'], $query) !== false;
+            return (strcasecmp($hero['name'], $query) === 0) || (strcasecmp($hero['alias'], $query) === 0);
         }); // Filters the superheroes array for a hero of matching name or alias 
-    
+
         if (empty($results)) { // Checks if hero exists
             echo "<h4 id=\"notfound\">SUPERHERO NOT FOUND</h4>" . "<br>";
         } else { // Return details of the hero
